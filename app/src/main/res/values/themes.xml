@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="justspeaksplash" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splasher</item>
+        <item name="android:statusBarColor">@color/justblue</item>
+        <item name="android:navigationBarColor">@color/justblue</item>
+        <item name="postSplashScreenTheme">@style/Theme.JustSpeak</item>
+
+    </style>
+
+    <style name="Theme.JustSpeak" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+</resources>
