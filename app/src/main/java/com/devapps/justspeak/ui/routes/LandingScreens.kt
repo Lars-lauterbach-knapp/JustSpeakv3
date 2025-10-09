@@ -7,3 +7,7 @@ object Check : ScreenRoutes {
 object Signup : ScreenRoutes {
     override val route = "signup_screen"
 }
+
+object Signout : ScreenRoutes {
+    override val route = "signout_screen"
+}
