@@ -90,13 +90,17 @@ dependencies {
     //serializable
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.coroutines.test)
+
     implementation(libs.firebase.auth)
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
+    implementation(platform(libs.firebase.bom))
+
 
     //splashscreen
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.play.services.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
