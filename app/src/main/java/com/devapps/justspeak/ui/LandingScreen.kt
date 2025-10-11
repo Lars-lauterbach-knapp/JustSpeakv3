@@ -50,7 +50,9 @@ import com.devapps.justspeak.ui.routes.Check
 import com.devapps.justspeak.ui.routes.Signout
 import com.devapps.justspeak.ui.routes.Signup
 import com.devapps.justspeak.ui.routes.german.GermanHome
+import com.devapps.justspeak.ui.routes.german.GermanNav
 import com.devapps.justspeak.ui.screens.german.GermanHomeScreen
+import com.devapps.justspeak.ui.screens.german.GermanNavigation
 import com.devapps.justspeak.ui.theme.justBlue
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
@@ -82,7 +84,7 @@ fun JustSpeakMainNavigation() {
                     if (state.isSignInSuccessful) {
 
                     }
-                    justSpeakMainNavController.navigate(GermanHome.route)
+                    justSpeakMainNavController.navigate(GermanNav.route)
                 } else {
                     justSpeakMainNavController.navigate(Signup.route)
                 }
@@ -92,8 +94,10 @@ fun JustSpeakMainNavigation() {
             SignupScreen(authViewModel, justSpeakMainNavController)
         }
 
-        composable(GermanHome.route) {
-            GermanHomeScreen(justSpeakMainNavController)
+        composable(GermanNav.route) {
+            GermanNavigation(
+                justSpeakMainNavController,
+                googleClientAuth.getSignedInUser())
         }
 
         composable(Signout.route) {
@@ -239,7 +243,7 @@ fun SignupScreen(
     }
     LaunchedEffect(state.isSignInSuccessful) {
         if (state.isSignInSuccessful) {
-            justSpeakMainNavController.navigate(GermanHome.route)
+            justSpeakMainNavController.navigate(GermanNav.route)
         } else if(state.signInError != null) {
             Toast.makeText(context,
                 "There was an error signing in " + state.signInError,

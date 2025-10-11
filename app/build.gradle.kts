@@ -102,6 +102,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.foundation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
