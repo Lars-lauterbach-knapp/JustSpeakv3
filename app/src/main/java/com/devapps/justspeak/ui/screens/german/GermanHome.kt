@@ -2,17 +2,14 @@ package com.devapps.justspeak.ui.screens.german
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
@@ -33,8 +30,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,14 +43,20 @@ import com.devapps.justspeak.data.model.GoogleClientAuth
 import com.devapps.justspeak.data.model.UserData
 import com.devapps.justspeak.ui.routes.Signout
 import com.devapps.justspeak.ui.routes.german.GermanConversations
+import com.devapps.justspeak.ui.routes.german.GermanExam
+import com.devapps.justspeak.ui.routes.german.GermanFlashcards
 import com.devapps.justspeak.ui.routes.german.GermanGrammar
 import com.devapps.justspeak.ui.routes.german.GermanHome
 import com.devapps.justspeak.ui.routes.german.GermanPhrases
 import com.devapps.justspeak.ui.screens.german.components.ConversationCard
-import com.devapps.justspeak.ui.screens.german.components.TopicCard
+import com.devapps.justspeak.ui.screens.german.components.LanguageSections
+import com.devapps.justspeak.ui.screens.german.components.ResourceSection
 import com.devapps.justspeak.ui.screens.german.components.UserProfile
 import com.devapps.justspeak.ui.theme.appleGreen
+import com.devapps.justspeak.ui.theme.neutralGreen
 import com.devapps.justspeak.ui.theme.peach
+import com.devapps.justspeak.ui.theme.teal
+import com.devapps.justspeak.utility.ResourceCardItem
 import com.devapps.justspeak.utility.TopicCardItem
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
@@ -75,7 +80,11 @@ fun GermanNavigation(
 
     NavHost(germanNavController, startDestination = GermanHome.route) {
         composable(GermanHome.route) {
-            GermanHomeScreen(userData, justSpeakNavController, onSignOut = {
+            GermanHomeScreen(
+                userData,
+                justSpeakNavController,
+                germanNavController,
+                onSignOut = {
                 coroutineScope.launch {
                     googleClientAuth.signOut()
                     Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show()
@@ -93,10 +102,14 @@ fun GermanNavigation(
 fun GermanHomeScreen(
     userData: UserData?,
     justSpeakNavController: NavController,
+    germanNavController: NavController,
     onSignOut: () -> Unit) {
 
     val showMenu = remember { mutableStateOf(false) }
     val selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
+    val selectedItemIndex1 by rememberSaveable {
         mutableStateOf(0)
     }
 
@@ -113,6 +126,19 @@ fun GermanHomeScreen(
             pic = R.drawable.phrases,
             route = GermanPhrases.route,
         ),
+    )
+
+    val resourceCards = listOf(
+        ResourceCardItem(
+            "Exam preparations",
+            teal,
+            GermanExam.route
+        ),
+        ResourceCardItem(
+            "Flashcards",
+            neutralGreen,
+            GermanFlashcards.route
+        )
     )
 
     Scaffold(
@@ -164,6 +190,7 @@ fun GermanHomeScreen(
         Column(modifier = Modifier
             .padding(it)
             .background(Color.White)
+            .verticalScroll(rememberScrollState())
         ) {
             Column(
                 modifier = Modifier
@@ -179,27 +206,28 @@ fun GermanHomeScreen(
                 Spacer(modifier = Modifier
                     .height(20.dp)
                 )
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(210.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    items(topicCards.size) {i ->
-                        val listItem = topicCards[i]
-                        TopicCard(
-                            selectedItemIndex == i,
-                            listItem.title,
-                            listItem.color,
-                            listItem.pic,
-                            onClick = {
-
-                            }
-
-                        )
-                    }
-                }
+                LanguageSections(
+                    topicCards,
+                    selectedItemIndex,
+                    justSpeakNavController,
+                    germanNavController
+                    )
+                Spacer(modifier = Modifier
+                    .height(20.dp)
+                )
+                Text("Resources",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier
+                    .height(10.dp)
+                )
+                ResourceSection(
+                    resourceCards,
+                    selectedItemIndex1,
+                    justSpeakNavController,
+                    germanNavController
+                )
             }
         }
 

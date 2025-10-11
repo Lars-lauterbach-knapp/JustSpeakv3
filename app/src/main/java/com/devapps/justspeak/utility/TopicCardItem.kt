@@ -8,3 +8,9 @@ data class TopicCardItem(
     val pic: Int,
     val route: String
 )
+
+data class ResourceCardItem(
+    val title: String,
+    val color: Color,
+    val route: String
+)
