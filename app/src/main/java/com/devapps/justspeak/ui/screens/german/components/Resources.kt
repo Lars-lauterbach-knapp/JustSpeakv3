@@ -148,10 +148,10 @@ fun GrammarCard() {
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier
-                    .height(50.dp)
+                    .height(15.dp)
                 )
                 Text("Learn the German Alphabet and sounds",
-                    fontSize = 20.sp
+                    fontSize = 16.sp
                 )
             }
         }
