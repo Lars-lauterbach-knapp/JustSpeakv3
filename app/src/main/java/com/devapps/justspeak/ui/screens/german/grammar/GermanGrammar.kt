@@ -38,6 +38,12 @@ import com.devapps.justspeak.ui.screens.german.components.LanguageSections
 import com.devapps.justspeak.ui.screens.german.components.ResourceSection
 import com.devapps.justspeak.ui.screens.german.components.UserProfile
 
+data class GermanGrammarItem(
+    val title: String,
+    val content: String,
+    val route: String
+)
+
 @Composable
 fun GermanGrammarNavigation() {
 

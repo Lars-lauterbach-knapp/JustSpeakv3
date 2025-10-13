@@ -2,6 +2,7 @@ package com.devapps.justspeak.ui.screens.german.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -95,12 +96,20 @@ fun ResourceCard(
 }
 
 @Composable
-fun GrammarCard() {
+fun GrammarCard(
+    selected: Boolean,
+    title: String,
+    content: String,
+    onClick: () -> Unit
+) {
 
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .height(110.dp),
+            .height(110.dp)
+            .clickable{
+                onClick()
+            },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 15.dp
         ),
@@ -143,14 +152,14 @@ fun GrammarCard() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Text("Alphabet",
+                Text(title,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier
                     .height(15.dp)
                 )
-                Text("Learn the German Alphabet and sounds",
+                Text(content,
                     fontSize = 16.sp
                 )
             }
@@ -158,8 +167,10 @@ fun GrammarCard() {
     }
 }
 
+
+
 @Composable
 @Preview
 fun PreviewResource() {
-    GrammarCard()
+
 }
