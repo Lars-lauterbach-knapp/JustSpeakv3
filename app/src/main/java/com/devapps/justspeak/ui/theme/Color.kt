@@ -15,4 +15,6 @@ val peach = Color(0xFFFACD91)
 
 val appleGreen = Color(0xFFCAF982)
 
+val grunGreen = Color(0xFF95F204)
+
 val neutralGreen = Color(0xFF00FF47)

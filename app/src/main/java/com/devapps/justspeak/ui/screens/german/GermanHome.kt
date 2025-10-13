@@ -94,6 +94,10 @@ fun GermanNavigation(
         composable(GermanConversations.route) {
 
         }
+
+        composable(GermanGrammar.route) {
+
+        }
     }
 }
 
