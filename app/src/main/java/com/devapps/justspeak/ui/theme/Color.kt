@@ -18,3 +18,5 @@ val appleGreen = Color(0xFFCAF982)
 val grunGreen = Color(0xFF95F204)
 
 val neutralGreen = Color(0xFF00FF47)
+
+val appGray = Color(0xFFD3D3D3)

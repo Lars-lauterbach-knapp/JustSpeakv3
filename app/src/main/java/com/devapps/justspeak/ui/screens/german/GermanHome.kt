@@ -52,6 +52,7 @@ import com.devapps.justspeak.ui.screens.german.components.ConversationCard
 import com.devapps.justspeak.ui.screens.german.components.LanguageSections
 import com.devapps.justspeak.ui.screens.german.components.ResourceSection
 import com.devapps.justspeak.ui.screens.german.components.UserProfile
+import com.devapps.justspeak.ui.screens.german.grammar.GermanGrammarNavigation
 import com.devapps.justspeak.ui.theme.appleGreen
 import com.devapps.justspeak.ui.theme.neutralGreen
 import com.devapps.justspeak.ui.theme.peach
@@ -96,7 +97,10 @@ fun GermanNavigation(
         }
 
         composable(GermanGrammar.route) {
-
+            GermanGrammarNavigation(
+                justSpeakNavController,
+                userData
+            )
         }
     }
 }

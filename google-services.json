@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "562297810018-l8iutfc41gmrjr7qaqeohipv3i917r1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devapps.justspeak",
+            "certificate_hash": "3377a9deaa00f6865e0b6d372d7bbb6ec00763de"
+          }
+        },
+        {
           "client_id": "562297810018-ubrf669jc01q8plgfs2tk655dejmd8jf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

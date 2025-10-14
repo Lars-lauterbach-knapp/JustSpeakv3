@@ -13,6 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,7 +34,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.devapps.justspeak.R
+import com.devapps.justspeak.ui.screens.german.grammar.GermanGrammarItem
 import com.devapps.justspeak.ui.theme.appleGreen
 import com.devapps.justspeak.ui.theme.grunGreen
 import com.devapps.justspeak.ui.theme.teal
@@ -157,12 +163,42 @@ fun GrammarCard(
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier
-                    .height(15.dp)
+                    .height(5.dp)
                 )
                 Text(content,
-                    fontSize = 16.sp
+                    fontSize = 14.sp
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun GermanGrammarList(
+    grammarList: List<GermanGrammarItem>,
+    germanGrammarNavController: NavController,
+    selectedItemIndex: Int,
+    justSpeakNavController: NavController,
+) {
+
+    val lazyLayoutList: LazyListState = rememberLazyListState()
+
+    LazyColumn(
+        state = lazyLayoutList,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(700.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        itemsIndexed(grammarList) { index, item ->
+           GrammarCard(
+                selected = index == selectedItemIndex,
+                title = item.title,
+                content = item.content,
+                onClick = {
+                     justSpeakNavController.navigate(item.route)
+                }
+           )
         }
     }
 }
