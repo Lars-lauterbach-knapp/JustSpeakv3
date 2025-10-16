@@ -104,6 +104,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.compose.ui.text)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
